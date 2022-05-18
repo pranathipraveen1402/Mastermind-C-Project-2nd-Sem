@@ -11,7 +11,6 @@ int RandomInteger(int low, int high)
   k = (int) (d*(high - low + 1));
   return (low + k);
 }
-
 int main()
 {
 	int l=4,min,sum,choice,tries=15;
@@ -45,7 +44,7 @@ int main()
 			int length = strlen(string);
 			if (string[0]=='S' && string[1]=='U' && string[2]=='R' && string[3]=='R' && string[4]=='E' && string[5]=='N' && string[6]=='D' && string[7]=='E' && string[8]=='R')
 			{
-				printf("You have lost the game. The secret code was %s\n", code);
+				printf("You have lost the game. The secret code was %s\n",code);
 				goto start;
 			}
 			if (length != l)
@@ -69,7 +68,7 @@ int main()
 			}
 			if (flag==1)
 			{
-				printf("Congratulations! You have won the game after %d tries\n", try);
+				printf("Congratulations! You have won the game after %d tries.\n", try);
 				goto start;
 			}
 			for (i=0;i<=(l-1);i++)
@@ -114,6 +113,7 @@ int main()
 			min=V1;
 			if (V2<min) min=V2;	
 			sum=sum+min;
+		
 			c=sum-cp;
 			printf("\tW: %d\n", c);
 			c=0;
@@ -146,14 +146,14 @@ int main()
         	}
         	if(dl==1)
         	{
-			printf("The difficulty level is set to \"Novice\". The colours available are: R O G Y P V.\nThe secret code length is 4. You're good to go, newbie!\nYou have 15 tries to guess the secret code.\n\n");
-		}
-		else if(dl==2)
-		{
-			printf("The difficulty level is set to \"Standard\". The colours available are: R O G Y P V.\nThe secret code length is 5. Nice choice, player!\nYou have 20 tries to guess the secret code.\n\n");
-			l = 5;
-			tries=20;
-		}
+				printf("The difficulty level is set to \"Novice\". The colours available are: R O G Y P V.\nThe secret code length is 4. You're good to go, newbie!\nYou have 15 tries to guess the secret code.\n\n");
+			}
+			else if(dl==2)
+			{
+				printf("The difficulty level is set to \"Standard\". The colours available are: R O G Y P V.\nThe secret code length is 5. Nice choice, player!\nYou have 20 tries to guess the secret code.\n\n");
+				l = 5;
+				tries=20;
+			}
         	else if(dl==3)
         	{
 				printf("The difficulty level is set to \"Expert\". The colours available are: R O G Y P V.\nThe secret code length is 6. Brace yourself, champion!\nYou have 25 tries to guess the secret code.\n\n");
