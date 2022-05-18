@@ -7,7 +7,6 @@ int RandomInteger(int low, int high)
 {
   int k;
   double d;
-
   d = (double)rand()/(1.0 + (double)RAND_MAX);
   k = (int) (d*(high - low + 1));
   return (low + k);
@@ -15,12 +14,12 @@ int RandomInteger(int low, int high)
 
 int main()
 {
-	int l=4,min,sum,choice;
-	start: printf("\t\t\t\tWELCOME TO MASTERMIND!\n\t\t\t\tTHE CODE BREAKING GAME!\n Choose one of the following:\n1.Play\n2.How to Play\n3.Difficulty\n4.About the Game\n");
+	int l=4,min,sum,choice,tries=15;
+	start: printf("\t\t\t\tWELCOME TO MASTERMIND!\n\t\t\t\tTHE CODE BREAKING GAME!\n Choose one of the following:\n1.Play\n2.How to Play\n3.Difficulty\n4.About the Game\n5.Quit\n");
 	scanf("%d",&choice);
 	if (choice == 1)
 	{
-		printf("The colours available are: R O G Y P V.\nThe default difficulty level is Novice. The secret code length is 4.");
+		printf("The colours available are: R O G Y P V.\nThe default difficulty level is Novice.\nThe secret code length is 4. You have 15 tries to guess the secret code.\n\n");
 		play: srand((int)time(NULL));
 		int i;
 		int table[l];
@@ -47,7 +46,7 @@ int main()
 			if (string[0]=='S' && string[1]=='U' && string[2]=='R' && string[3]=='R' && string[4]=='E' && string[5]=='N' && string[6]=='D' && string[7]=='E' && string[8]=='R')
 			{
 				printf("You have lost the game. The secret code was %s\n", code);
-				break;
+				goto start;
 			}
 			if (length != l)
 			{
@@ -71,7 +70,7 @@ int main()
 			if (flag==1)
 			{
 				printf("Congratulations! You have won the game after %d tries\n", try);
-				break;
+				goto start;
 			}
 			for (i=0;i<=(l-1);i++)
 			{
@@ -115,12 +114,18 @@ int main()
 			min=V1;
 			if (V2<min) min=V2;	
 			sum=sum+min;
-		
 			c=sum-cp;
 			printf("\tW: %d\n", c);
 			c=0;
 			cp=0;	
 			try++;	
+			if (try>tries)
+			{
+				printf("You have exceeded the number of tries allowed.\n");
+				printf("You have lost the game. The secret code was %s\n", code);
+				printf("Thanks for playing Mastermind. Goodbye!\n");
+				break;
+			}
 		}
 	}
 	else if (choice == 2)
@@ -132,7 +137,7 @@ int main()
 	{
 		int dl;
         	printf("Choose Difficulty Level. Type:\n");
-		printf("1 for Novice\n2 for Expert\n");
+		printf("1 for Novice\n2 for Standard\n3 for Expert\n");
 		scanf("%d",&dl);
         	while(dl!=1 && dl!=2)
         	{
@@ -141,19 +146,30 @@ int main()
         	}
         	if(dl==1)
         	{
-			printf("The difficulty level is set to \"Novice\". The colours available are: R O G Y P V.\nThe secret code length is 4. You're good to go, newbie!\n\n");
+			printf("The difficulty level is set to \"Novice\". The colours available are: R O G Y P V.\nThe secret code length is 4. You're good to go, newbie!\nYou have 15 tries to guess the secret code.\n\n");
 		}
-        	else if(dl==2)
+		else if(dl==2)
+		{
+			printf("The difficulty level is set to \"Standard\". The colours available are: R O G Y P V.\nThe secret code length is 5. Nice choice, player!\nYou have 20 tries to guess the secret code.\n\n");
+			l = 5;
+			tries=20;
+		}
+        	else if(dl==3)
         	{
-			printf("The difficulty level is set to \"Expert\". The colours available are: R O G Y P V.\nThe secret code length is 6. Brace yourself, champion!\n\n");
-			l = 6;
+				printf("The difficulty level is set to \"Expert\". The colours available are: R O G Y P V.\nThe secret code length is 6. Brace yourself, champion!\nYou have 25 tries to guess the secret code.\n\n");
+				l = 6;
+				tries=25;
         	}
 		goto play;
 	}
 	else if (choice == 4)
 	{
-		printf("\nABOUT THE GAME:\nMaster Mind is a code-breaking game for two players – a code maker and a code breaker.\nWith four pegs and six colors, there are 64 = 1296 different patterns (allowing duplicate colors).\nVarying the number of colors and the number of holes results in a spectrum of Mastermind games of different levels of difficulty.\nIn this program, computer plays the role of code maker and user plays the role of code breaker.\nCode maker (computer) creates a code consisting of 4 or more colors at specific positions, but does not reveal the code to code breaker (user).\nCode breaker tries to guess the pattern, in both order and color, within ‘x’ turns, where x is determined based on the difficulty level.\n\n");
+		printf("\nABOUT THE GAME:\nMaster Mind is a code-breaking game for two players - a code maker and a code breaker.\nWith four pegs and six colors, there are 64 = 1296 different patterns (allowing duplicate colors).\nVarying the number of colors and the number of holes results in a spectrum of Mastermind games\nof different levels of difficulty.\nIn this program, computer plays the role of code maker and user plays the role of code breaker.\nCode maker (computer) creates a code consisting of 4 or more colors at specific positions,\nbut does not reveal the code to code breaker (user).\nCode breaker tries to guess the pattern, in both order and color, within \'x\' turns,\nwhere x is determined based on the difficulty level.\n\n");
 		goto start;
+	}
+	else if (choice == 5)
+	{
+		printf("Thanks for playing Mastermind. Goodbye!");
 	}
 	else
 	{
