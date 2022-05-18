@@ -130,7 +130,7 @@ int main()
 	}
 	else if (choice == 2)
 	{
-		printf("\nHOW TO PLAY:\nThe computer creates a code which has to be quessed by the user.\nEach guess is made by the user by typing first letter of the colors, for example, G R Y P.\nOnce code is typed, the code maker (computer) provides feedback by displaying m B and n W,\nwhere m and n can be a positive integer <= number of positions (for example 1 B, 2 W).\nB is displayed for each color from the guess which is correct in both color and position.\nW indicates the existence of a correct color, but placed in the wrong position.\nOnce feedback is provided, another guess is made by the user;\nguesses and feedback continue to alternate until either the code breaker guesses correctly,\nor twelve (or ten, or eight) incorrect guesses are made, depending on the difficulty level.\n\n");
+		printf("\nHOW TO PLAY:\nThe computer creates a code which has to be quessed by the user.\nEach guess is made by the user by typing first letter of the colors, for example, G R Y P.\nOnce code is typed, the code maker (computer) provides feedback by displaying m B and n W,\nwhere m and n can be a positive integer <= number of positions (for example 1 B, 2 W).\nB is displayed for each color from the guess which is correct in both color and position.\nW indicates the existence of a correct color, but placed in the wrong position.\nOnce feedback is provided, another guess is made by the user;\nguesses and feedback continue to alternate until either the code breaker guesses correctly,\nor 15 (or 20 or 25) incorrect guesses are made, depending on the difficulty level.\n\n");
 		goto start;
 	}
 	else if (choice == 3)
