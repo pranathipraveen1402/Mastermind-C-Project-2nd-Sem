@@ -16,7 +16,7 @@ void computeFeedback(char codeString[], char guessString[]);
 #define EXPERT 3
 #define CODE_MAX_LENGTH 10
 #define MAX_ATTEMPTS 10
-#define NOVICE_ATTEMPTS 3
+#define NOVICE_ATTEMPTS 10
 #define STANDARD_ATTEMPTS 20
 #define EXPERT_ATTEMPTS 30
 #define NOVICE_CODE_LEN 4
@@ -70,18 +70,18 @@ void simulateGame() {
 
 void howToPlay() {
 
-	printf("\nHOW TO PLAY:\nThe computer creates a code which"
-		"has to be quessed by the user.\nEach guess is made by the"  
-		"user by typing first letter of the colors, for example," 
-		"G R Y P.\nOnce code is typed, the code maker (computer)" 
+	printf("\nHOW TO PLAY:\nThe computer creates a code which "
+		"has to be quessed by the user.\nEach guess is made by the "  
+		"user by typing first letter of the colors, for example, " 
+		"G R Y P.\nOnce code is typed, the code maker (computer) " 
 		"provides feedback by displaying m B and n W,\nwhere m and n "
 		"can be a positive integer <= number of positions (for example 1 B, 2 W).\n"
 		"B is displayed for each color from the guess which is correct "
 		"in both color and position.\nW indicates the existence of a correct color, "
 		"but placed in the wrong position.\nOnce feedback is provided, "
-		"another guess is made by the user;\nguesses and feedback continue" 
+		"another guess is made by the user;\nguesses and feedback continue " 
 		"to alternate until either the code breaker guesses correctly,\n"
-		"or twelve (or ten, or eight) incorrect guesses are made, depending" 
+		"or twelve (or ten, or eight) incorrect guesses are made, depending " 
 		"on the difficulty level.\n\n");
 		
 }
@@ -131,18 +131,18 @@ void selectDifficultyLevel() {
 
 void aboutGame() {
 
-	printf("\nABOUT THE GAME:\nMaster Mind is a code-breaking game" 
-		"for two players – a code maker and a code breaker.\n"
-		"With four pegs and six colors, there are 64 = 1296 different" 
-		"patterns (allowing duplicate colors).\nVarying the number of" 
-		"colors and the number of holes results in a spectrum of" 
+	printf("\nABOUT THE GAME:\nMaster Mind is a code-breaking game " 
+		"for two players - a code maker and a code breaker.\n"
+		"With four pegs and six colors, there are 6^4 = 1296 different " 
+		"patterns (allowing duplicate colors).\nVarying the number of " 
+		"colors and the number of holes results in\na spectrum of" 
 		"Mastermind games of different levels of difficulty.\n"
-		"In this program, computer plays the role of code maker and" 
-		"user plays the role of code breaker.\nCode maker (computer)" 
-		"creates a code consisting of 4 or more colors at specific" 
-		"positions, but does not reveal the code to code breaker" 
-		"(user).\nCode breaker tries to guess the pattern, in both" 
-		"order and color, within ‘x’ turns, where x is determined" 
+		"In this program, computer plays the role of code maker and " 
+		"user plays the role of code breaker.\nCode maker (computer) " 
+		"creates a code consisting of 4 or more colors at specific " 
+		"positions,\nbut does not reveal the code to code breaker " 
+		"(user).\nCode breaker tries to guess the pattern, in both " 
+		"order and color, within 'x'turns,\nwhere x is determined " 
 		"based on the difficulty level.\n\n");
 	
 		printf("To get a feel try to Simulate the game -- press option 5\n\n");
@@ -225,7 +225,8 @@ void playGame() {
 
 	while(flag == TRUE) {
 		if(turn > numAttempts) {
-			printf("Tough Luck. You are out of turns \n");
+			printf("Tough Luck. You are out of turns.\n");
+			printf("The secret code was %s\n",codeString);
 			return;
 		}
 		printf("This is your %d of %d attempts\n", turn, numAttempts);
@@ -240,6 +241,7 @@ void playGame() {
 		}
 		if(strcmp(guessString, "QUIT") == 0) {
 			printf("You have decided to QUIT this game. Try your luck next time... \n");
+			printf("The secret code was %s\n",codeString);
 			return;
 		}
 
@@ -286,7 +288,7 @@ int main()
 		printf("\n\n\t\t\t\tWELCOME TO MASTERMIND!\n\t\t\t\t"
 			"THE CODE BREAKING GAME!\n Choose one of the following:"
 			"\n1.Play\n2.How to Play\n3.Difficulty\n4.About the Game\n"
-			"5.Simulate the game\n10.Quit\n");
+			"5.Simulate the game\n6.Quit\n");
 
 		scanf("%d",&choice);
 
@@ -306,7 +308,7 @@ int main()
 			case 5:
 				simulateGame();
 				break;
-			case 10:
+			case 6:
 				flag = FALSE;
 				break;
 		}
