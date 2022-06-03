@@ -252,7 +252,7 @@ void playGame()
 				break;
 		}
 	}
-	printf("%s\n",codeString);
+	//printf("%s\n",codeString);
 
 	printf("You are %s User \n", (difficultyLevel == 1) ? "NOVICE" : 
 			(difficultyLevel == 2) ? ("STANDARD") : ("EXPERT"));
