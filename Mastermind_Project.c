@@ -30,23 +30,23 @@ int numAttempts = NOVICE_ATTEMPTS;
 
 typedef struct
 {
-  int colors[4];
-  int black;
-  int white;
+	int colors[4];
+	int black;
+	int white;
 } guess;
 
 int randomInteger(int low, int high)
 {
-  int k;
-  double d;
-
-  d = (double)rand()/(1.0 + (double)RAND_MAX);
-  k = (int) (d*(high - low + 1));
-  return (low + k);
+	int k;
+	double d;
+	d = (double)rand()/(1.0 + (double)RAND_MAX);
+	k = (int) (d*(high - low + 1));
+	return (low + k);
 }
 
 void simulateGame() 
 {
+	//A function to show a demonstration of the game
 	char code[4] = {'R','O','V','G'};
 
 	printf("Try guessing \n");
@@ -73,8 +73,28 @@ void simulateGame()
 	return;
 }
 
+void aboutGame() 
+{
+	//A function to display some information about the game
+	printf("\nABOUT THE GAME:\nMaster Mind is a code-breaking game " 
+		"for two players - a code maker and a code breaker.\n"
+		"With four pegs and six colors, there are 6^4 = 1296 different " 
+		"patterns (allowing duplicate colors).\nVarying the number of " 
+		"colors and the number of holes results in\na spectrum of " 
+		"Mastermind games of different levels of difficulty.\n"
+		"In this program, computer plays the role of code maker and " 
+		"user plays the role of code breaker.\nCode maker (computer) " 
+		"creates a code consisting of 4 or more colors at specific " 
+		"positions,\nbut does not reveal the code to code breaker " 
+		"(user).\nCode breaker tries to guess the pattern, in both " 
+		"order and color, within 'x'turns,\nwhere x is determined " 
+		"based on the difficulty level.\n\n");
+		printf("To get a feel, try to simulate the game -- press option 5\n\n");
+}
+
 void howToPlay() 
 {
+	//A function to display the rules of the game
 	printf("\nHOW TO PLAY:\nThe computer creates a code which "
 		"has to be quessed by the user.\nEach guess is made by the "  
 		"user by typing first letter of the colors, for example, " 
@@ -92,6 +112,7 @@ void howToPlay()
 
 void selectDifficultyLevel() 
 {
+	//A function to let the user choose the difficulty level
 	int dl = 0;
 	printf("Choose Difficulty Level\n");
 	printf("1 for Novice\n2 for Standard and \n3 for Expert\n");
@@ -133,26 +154,9 @@ void selectDifficultyLevel()
 	}
 }
 
-void aboutGame() 
-{
-	printf("\nABOUT THE GAME:\nMaster Mind is a code-breaking game " 
-		"for two players - a code maker and a code breaker.\n"
-		"With four pegs and six colors, there are 6^4 = 1296 different " 
-		"patterns (allowing duplicate colors).\nVarying the number of " 
-		"colors and the number of holes results in\na spectrum of " 
-		"Mastermind games of different levels of difficulty.\n"
-		"In this program, computer plays the role of code maker and " 
-		"user plays the role of code breaker.\nCode maker (computer) " 
-		"creates a code consisting of 4 or more colors at specific " 
-		"positions,\nbut does not reveal the code to code breaker " 
-		"(user).\nCode breaker tries to guess the pattern, in both " 
-		"order and color, within 'x'turns,\nwhere x is determined " 
-		"based on the difficulty level.\n\n");
-		printf("To get a feel, try to simulate the game -- press option 5\n\n");
-}
-
 void computeFeedback(char codeString[], char guessString[]) 
 {
+	//A function to compute and display the feedback for each guess
 	int min, sum, cp=0, c=0, i;
 	int l = strlen(codeString);
 	char code[CODE_MAX_LENGTH], string[CODE_MAX_LENGTH];
@@ -208,7 +212,7 @@ void computeFeedback(char codeString[], char guessString[])
 }
 void playGame() 
 {
-	// Loop until User quits, Runs out of tries or Cracks the code
+	//The function that contains the loop for the game
 	char flag = TRUE, v = FALSE;
 	char codeString[CODE_MAX_LENGTH];
 	char guessString[CODE_MAX_LENGTH];
@@ -230,6 +234,7 @@ void playGame()
 		guessString[i] = '\0';
 		codeString[i] = '\0';
 	}
+	
 	//Valid color codes are R, O, G, Y, P, V
 	for(int i = 0; i < l ; i++) 
 	{
@@ -259,12 +264,12 @@ void playGame()
 				break;
 		}
 	}
-	//printf("%s\n",codeString);
 
 	printf("You are %s User \n", (difficultyLevel == 1) ? "NOVICE" : 
 			(difficultyLevel == 2) ? ("STANDARD") : ("EXPERT"));
 	printf("You have %d Attempts\n", numAttempts);
 
+	//Loop until User quits, Runs out of tries or Cracks the code
 	while(flag == TRUE) 
 	{
 		if(turn > numAttempts) 
@@ -275,7 +280,6 @@ void playGame()
 		}
 		printf("This is your %d of %d attempts\n", turn, numAttempts);
 		turn++;
-
 		printf("Enter the guess string containing R, O, G, Y, P, V only\n");
 		scanf("%s", guessString);
 
@@ -290,7 +294,6 @@ void playGame()
 			printf("The secret code was %s\n",codeString);
 			return;
 		}
-
 		len = strlen(guessString);
 		if(difficultyLevel == NOVICE && len != NOVICE_CODE_LEN ||
 			difficultyLevel == STANDARD && len != STANDARD_CODE_LEN ||
@@ -301,11 +304,9 @@ void playGame()
 			continue;
 		}
 		
-		//printf("Setting V to FALSE\n");
 		v = FALSE;
 		for(int i = 0; i < len; i++) 
 		{
-			//printf("guessString[%d] = %c\n", i, guessString[i]);
 			if(guessString[i] != 'R' && guessString[i] != 'O' && guessString[i] != 'G'
 				&& guessString[i] != 'Y' && guessString[i] != 'P' && guessString[i] != 'V') 
 			{
@@ -316,7 +317,6 @@ void playGame()
 				//break;
 			}
 		}
-
 		if(v == TRUE) 
 		{
 			printf("Due to invalid character continue with new input\n");
@@ -329,6 +329,7 @@ void playGame()
 
 void valuation(int *col1, int *col2, int *wp, int *bp)
 {
+	//A function to find the number of Black and White pegs to be given as feedback
 	int color[6][2];
 	int c;
 	int white;
@@ -356,6 +357,7 @@ void valuation(int *col1, int *col2, int *wp, int *bp)
 
 int search(int *colors, int depth, guess *gp, int guesses)
 {
+	//A function to search for the common colours in the guess and secret code
 	int guess;
 	int white, black;
 	int c;
@@ -378,22 +380,10 @@ int search(int *colors, int depth, guess *gp, int guesses)
   	return 0;
 }
 
-char *my_strchr(char a[],char ch)
-{
-	char *p = NULL;
-	char *s = a;
-	while(*s!='\0' && p==NULL)
-	{
-		if(*s==ch)
-			p=s;
-		s++;
-	}
-	return p;
-}
-
 int indexof(char *string, char character)
 {
-	char *p = my_strchr(string,character);
+	//A function to find the first occurance of a character in a string
+	char *p = strchr(string,character);
 	if(p)
 	{
 		int i = p - string;
@@ -405,46 +395,53 @@ int indexof(char *string, char character)
 
 void codeMaker()
 {
+	//The function that contains the code for the computer guessing the secret code
 	srand((unsigned)time(NULL));
-	char secret_code[4];
-	char *valid_colours = "ROGYPV";
-	char *valid = valid_colours;
-	//printf("%s",valid_colours);
+	char secret_code[100];
+	char valid_colours[] = "ROGYPV";
 	printf("You have chosen to be code maker!\n");
 	printf("You have to make a secret code and the computer will guess the code in miniumum number of tries.\n");
 	printf("The length of the secret code should be 4. The valid colours are R, O, G, Y, P and V.\n");
 	printf("You can create a secret code with a combination of these colours, with or without repition.\n");
 	printf("Enter the code: ");
-	scanf("%s",secret_code);
-	printf("---------------------\n");
-	printf(" turn :  code  : W/B \n");
-	printf("---------------------\n");
-	
 	int toguess[4];
 	int c;
 	int done=0;
 	guess *gp=NULL, *cur;
 	int guesses=0;
-	int len = strlen(secret_code);
-	
-	while(len != 4)
+	int wrongstring;
+	int len;
+	do
 	{
-		printf("The secret code length is invalid.\nEnter a code of length 4.");
+		printf("Enter the code: ");
 		scanf("%s",secret_code);
-		printf("%ld",strlen(secret_code));
 		len = strlen(secret_code);
-	}
-	
-	for(c=0; c<4; c++)
-	{
-		while(my_strchr(valid_colours,secret_code[c])==NULL)
+		wrongstring = 0;
+		if(len!=4)
 		{
-			//fprintf(stderr,"Color no. %d (value %d) is out of range\n", c, toguess[c]);
-			//exit(-1);
-			printf("Color no. %d (value %c) is not valid. Enter code again.\n",(c+1),secret_code[c]);
-			scanf("%s",secret_code);
+			printf("The secret code length is invalid. Enter a code of length 4.\n");
+			wrongstring = 1;
 		}
-	}
+		else
+		{
+			for(c=0; c<4; c++)
+			{
+				if(strchr(valid_colours,secret_code[c])==NULL)
+				{
+					printf("Color no. %d (value %c) is not valid.\n",(c+1),secret_code[c]);
+					wrongstring = 1;
+					break;
+				}
+				else
+				{
+					wrongstring = 0;
+				}
+			}
+		}	
+	} while (wrongstring != 0);
+	printf("---------------------\n");
+	printf(" turn :  code  : W/B \n");
+	printf("---------------------\n");
 	
 	for(c=0; c<4; c++)
 	{
@@ -489,7 +486,6 @@ int main()
 {
 	int choice = 0;
 	char flag = TRUE;
-
 	while(flag == TRUE) 
 	{
 		printf("\n\n\t\t\t\tWELCOME TO MASTERMIND!\n\t\t\t\t"
@@ -498,7 +494,6 @@ int main()
 			"5.How to Play\n6.Simulate the game\n7.Quit\n");
 
 		scanf("%d",&choice);
-
 		switch(choice) 
 		{
 			case 1:
