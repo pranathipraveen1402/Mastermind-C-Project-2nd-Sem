@@ -403,7 +403,7 @@ void codeMaker()
 	printf("You have to make a secret code and the computer will guess the code in miniumum number of tries.\n");
 	printf("The length of the secret code should be 4. The valid colours are R, O, G, Y, P and V.\n");
 	printf("You can create a secret code with a combination of these colours, with or without repition.\n");
-	printf("Enter the code: ");
+
 	int toguess[4];
 	int c;
 	int done=0;
