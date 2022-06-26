@@ -240,7 +240,8 @@ void playGame()
 	{
 		int random = randomInteger(1, 6);
 
-		switch(random) {
+		switch(random) 
+		{
 			case 1: 
 				codeString[i] = 'R';
 				break;
@@ -279,7 +280,6 @@ void playGame()
 			return;
 		}
 		printf("This is your %d of %d attempts\n", turn, numAttempts);
-		turn++;
 		printf("Enter the guess string containing R, O, G, Y, P, V only\n");
 		scanf("%s", guessString);
 
@@ -312,7 +312,6 @@ void playGame()
 			{
 				printf("You have entered invalid color code %c at position %d\n", 
 						guessString[i], i);
-				printf("Setting V to TRUE\n");
 				v = TRUE;
 				//break;
 			}
@@ -324,6 +323,7 @@ void playGame()
 		}
 		//Feedback computation
 		computeFeedback(codeString, guessString);
+		turn++;
 	}
 }
 
