@@ -5,10 +5,12 @@
 
 extern void sleep(int seconds);
 void simulateGame(void);
+void aboutGame(void);
 void howToPlay(void);
 void selectDifficultyLevel(void);
 void playGame(void);
 void computeFeedback(char codeString[], char guessString[]);
+void codeMaker(void);
 
 #define NOVICE 1
 #define STANDARD 2
@@ -240,8 +242,7 @@ void playGame()
 	{
 		int random = randomInteger(1, 6);
 
-		switch(random) 
-		{
+		switch(random) {
 			case 1: 
 				codeString[i] = 'R';
 				break;
@@ -266,9 +267,10 @@ void playGame()
 		}
 	}
 
-	printf("You are %s User \n", (difficultyLevel == 1) ? "NOVICE" : 
+	printf("You are %s User.\n", (difficultyLevel == 1) ? "NOVICE" : 
 			(difficultyLevel == 2) ? ("STANDARD") : ("EXPERT"));
-	printf("You have %d Attempts\n", numAttempts);
+	printf("You have to enter a code of length %d.\n",l);
+	printf("You have %d Attempts.\n", numAttempts);
 
 	//Loop until User quits, Runs out of tries or Cracks the code
 	while(flag == TRUE) 
@@ -280,6 +282,7 @@ void playGame()
 			return;
 		}
 		printf("This is your %d of %d attempts\n", turn, numAttempts);
+		turn++;
 		printf("Enter the guess string containing R, O, G, Y, P, V only\n");
 		scanf("%s", guessString);
 
@@ -312,6 +315,7 @@ void playGame()
 			{
 				printf("You have entered invalid color code %c at position %d\n", 
 						guessString[i], i);
+				printf("Setting V to TRUE\n");
 				v = TRUE;
 				//break;
 			}
@@ -323,7 +327,6 @@ void playGame()
 		}
 		//Feedback computation
 		computeFeedback(codeString, guessString);
-		turn++;
 	}
 }
 
